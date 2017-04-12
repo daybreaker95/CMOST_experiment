@@ -605,6 +605,7 @@ end
 % Default Benchmarks.
 function DefaultBenchmarks_Callback(hObject, eventdata, handles)
 handles = Default_Benchmarks(handles);
+msgbox('Default settings restored')
 guidata(hObject, handles)
 
 

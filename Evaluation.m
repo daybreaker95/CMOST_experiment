@@ -67,7 +67,10 @@ Variables.Benchmarks.Cancer.Fastcancer           = [0.005 0.05 0.08 0.25 3 20];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if DispFlag
-    h1 = figure; h2 = figure; h3 = figure; h4 = figure;
+    h1 = figure('numbertitle', 'off', 'name', ['Figure 1: Prevalence of early and advanced adenoma, CRC incidence. Settings: ', Variables.Settings_Name]);
+    h2 = figure('numbertitle', 'off', 'name', ['Figure 2: Adenoma characteristics. Settings: ', Variables.Settings_Name]);
+    h3 = figure('numbertitle', 'off', 'name', ['Figure 3: Cancer characteristics. Settings: ', Variables.Settings_Name]);
+    h4 = figure('numbertitle', 'off', 'name', ['Figure 4: CRC effects and CRC screening. Settings: ', Variables.Settings_Name]);
     scrsz = get(0, 'screensize');
     for f = [h1 h2 h3 h4]
         set(f, 'position', scrsz)
@@ -100,12 +103,12 @@ end
 
 % the fraction of surviving patients with advanced polyps
 [BM , bmc, OutputFlags, OutputValues] = CalculateAgreement(FracPolyps, bmc, BM, Variables.Benchmarks, 'EarlyPolyp', 'Ov_y', 'Ov_perc',...
-    DispFlag, 1, 'early polyps year ', 'early polyps present', tolerance, LineSz, MarkerSz, FontSz, '% of survivors', 'Polyp'); 
+    DispFlag, 1, 'early polyps year ', 'early polyps overall', tolerance, LineSz, MarkerSz, FontSz, '% of survivors', 'Polyp'); 
 BM.Graph.EarlyAdenoma_Ov = FracPolyps; BM.OutputFlags.EarlyAdenoma_Ov = OutputFlags; BM.OutputValues.EarlyAdenoma_Ov = OutputValues;
 
 % the fraction of surviving patients with advanced polyps
 [BM , bmc, OutputFlags, OutputValues] = CalculateAgreement(FracPolyps_5, bmc, BM, Variables.Benchmarks, 'AdvPolyp', 'Ov_y', 'Ov_perc',...
-    DispFlag, 2, 'advanced polyps year ', 'advanced polyps present', tolerance, LineSz, MarkerSz, FontSz, '% of survivors', 'Polyp');  
+    DispFlag, 2, 'advanced polyps year ', 'advanced polyps overall', tolerance, LineSz, MarkerSz, FontSz, '% of survivors', 'Polyp');  
 BM.Graph.AdvAdenoma_Ov = FracPolyps_5; BM.OutputFlags.AdvAdenoma_Ov = OutputFlags; BM.OutputValues.AdvAdenoma_Ov = OutputValues;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
