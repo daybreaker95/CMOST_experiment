@@ -31,6 +31,13 @@ import re
 import copy
 import pickle
 import numpy as np
+
+# Ensure the python/ directory is on the import path so sibling modules
+# (calculate_sub, NumberCrunching_100000, Evaluation, etc.) can be found.
+_this_dir = os.path.dirname(os.path.abspath(__file__))
+if _this_dir not in sys.path:
+    sys.path.insert(0, _this_dir)
+
 import tkinter as tk
 from tkinter import messagebox, filedialog, simpledialog
 

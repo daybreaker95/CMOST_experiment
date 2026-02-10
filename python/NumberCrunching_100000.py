@@ -592,7 +592,10 @@ def NumberCrunching_100000(p, StageVariables, Location, Cost, CostStage, risc,
     # for colonoscopy and rectosigmoidoscopy
 
     # INITIALIZE
-    n = 100000
+    # n is derived from the Gender array length, which was sized for the
+    # requested Number_patients by calculate_sub. The original MATLAB code
+    # hardcoded n=100000; here we support variable population sizes.
+    n = len(Gender)
     Included = np.ones(n, dtype=bool)       # initially all patients are included
     Alive = np.ones(n, dtype=bool)          # initially all patients are alive
     DeathCause = np.zeros(n)

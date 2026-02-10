@@ -204,10 +204,10 @@ def Evaluation(data, Variables):
     tolerance = 0.2
 
     BM = {}
-    BM['description'] = [None] * 100
-    BM['value'] = [None] * 100
-    BM['benchmark'] = [None] * 100
-    BM['flag'] = [None] * 100
+    BM['description'] = [None] * 500
+    BM['value'] = [None] * 500
+    BM['benchmark'] = [None] * 500
+    BM['flag'] = [None] * 500
     BM['Graph'] = {}
     BM['OutputFlags'] = {}
     BM['OutputValues'] = {}
