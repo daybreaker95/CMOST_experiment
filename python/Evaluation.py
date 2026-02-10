@@ -1096,6 +1096,7 @@ def Evaluation(data, Variables):
     SummaryVariable[17] = DwellTimeAllCa
     SummaryVariable[18] = DwellTimeProgressedCa
     SummaryVariable[19] = DwellTimeFastCa
+    SummaryVariable[20] = SojournDoc['SojournMedian']
 
     SummaryVariable[63] = Variables.get('Comment', '')
     SummaryVariable[64] = Variables.get('Settings_Name', '')
@@ -1846,32 +1847,44 @@ def Evaluation(data, Variables):
 
     if ResultsFlag:
         FileName = ResultsFullfile + '_Results.npz'
-        Results['Var_Legend'] = SummaryLegend
-        Results['Variable'] = SummaryVariable
-        Results['BM_Description'] = BM['description']
-        Results['BM_Value'] = BM['value']
-        Results['Benchmark'] = BM['benchmark']
-
-        Results['NumberPatients'] = np.zeros(100)
-        for f in range(100):
-            Results['NumberPatients'][f] = np.sum(data['YearIncluded'][f, :])
-
-        Results['Early_Cancer'] = Early_Cancer[0:100].copy()
-        Results['Late_Cancer'] = Late_Cancer[0:100].copy()
-
-        Results['Treatment'] = np.round(data['Money']['Treatment'][0:100] / n * 100) / 100
-        Results['TreatmentFuture'] = np.round(data['Money']['FutureTreatment'][0:100] / n * 100) / 100
-        Results['Screening'] = np.round(data['Money']['Screening'][0:100] / n * 100) / 100
-        Results['FollowUp'] = np.round(data['Money']['FollowUp'][0:100] / n * 100) / 100
-        Results['Other'] = np.round(data['Money']['Other'][0:100] / n * 100) / 100
-        Results['InputCost'] = data['InputCost']
-        Results['InputCostStage'] = data['InputCostStage']
-        Results['PaymentType'] = data['PaymentType']
-
         try:
+            Results['Var_Legend'] = SummaryLegend
+            Results['Variable'] = SummaryVariable
+            Results['BM_Description'] = BM['description']
+            Results['BM_Value'] = BM['value']
+            Results['Benchmark'] = BM['benchmark']
+
+            Results['NumberPatients'] = np.zeros(100)
+            for f in range(100):
+                Results['NumberPatients'][f] = np.sum(data['YearIncluded'][f, :])
+
+            Results['Early_Cancer'] = Early_Cancer[0:100].copy()
+            Results['Late_Cancer'] = Late_Cancer[0:100].copy()
+
+            Results['Treatment'] = np.round(data['Money']['Treatment'][0:100] / n * 100) / 100
+            Results['TreatmentFuture'] = np.round(data['Money']['FutureTreatment'][0:100] / n * 100) / 100
+            Results['Screening'] = np.round(data['Money']['Screening'][0:100] / n * 100) / 100
+            Results['FollowUp'] = np.round(data['Money']['FollowUp'][0:100] / n * 100) / 100
+            Results['Other'] = np.round(data['Money']['Other'][0:100] / n * 100) / 100
+            Results['InputCost'] = data['InputCost']
+            Results['InputCostStage'] = data['InputCostStage']
+            Results['PaymentType'] = data['PaymentType']
+
+            # Ensure the directory exists
+            results_dir = os.path.dirname(FileName)
+            if results_dir and not os.path.exists(results_dir):
+                os.makedirs(results_dir)
+
             np.savez(FileName, **Results)
-        except Exception:
+            print(f"Results saved to: {FileName}")
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            print(f"ERROR: Could not save results file '{FileName}': {e}")
             warnings.warn('Could not save results file, try entering a correct pathway '
                           'to the save data path in main window.')
+    else:
+        print("ResultsFlag is disabled -- skipping results file save. "
+              "Enable 'Enable Results' checkbox in main window to save results.")
 
     return data, BM
