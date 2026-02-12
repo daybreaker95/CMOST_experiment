@@ -766,6 +766,9 @@ def Evaluation(data, Variables):
     DwellTimeAllCa = np.median(combined_dwell) if len(combined_dwell) > 0 else 0
     DwellTimeProgressedCa = np.median(AllDwellCa) if len(AllDwellCa) > 0 else 0
     DwellTimeFastCa = np.median(AllDwellFastCa) if len(AllDwellFastCa) > 0 else 0
+    # print(f"DEBUG: DwellTimeAllCa = {DwellTimeAllCa}", flush=True)
+    # print(f"DEBUG: DwellTimeProgressedCa = {DwellTimeProgressedCa}", flush=True)
+    # print(f"DEBUG: DwellTimeFastCa = {DwellTimeFastCa}", flush=True)
 
     DwellDoc = {}
     if len(combined_dwell) > 0:

@@ -21,6 +21,15 @@
 
 import numpy as np
 import math
+import os
+
+# ---------------------------------------------------------------------------
+# DEBUG_TRACE: set to True (or set env var CMOST_DEBUG_TRACE=1) to log every
+# cancer creation event to a CSV file for comparison with MATLAB.
+# The trace file is written to python/debug_cancer_trace.csv.
+# ---------------------------------------------------------------------------
+DEBUG_TRACE = os.environ.get('CMOST_DEBUG_TRACE', '0') == '1'
+_trace_rows = []  # populated when DEBUG_TRACE is True
 
 # ---------------------------------------------------------------------------
 # INDEX CONVENTION NOTES:
@@ -755,15 +764,9 @@ def NumberCrunching_100000(p, StageVariables, Location, Cost, CostStage, risc,
         TmpLoc[f + 1, :] = np.logical_or(TmpLoc[f + 1, :], TmpLoc[f, :])
     ColoReachMatrix = -np.sum(TmpLoc, axis=0) + 14
 
-    # LocationMatrix (re-built from Location.NewPolyp, not the input parameter)
-    LocationMatrix = np.zeros(1000)
-    Counter = 0
-    for f in range(13):
-        # MATLAB: Ende = round(sum(Location.NewPolyp(1:f))/sum(Location.NewPolyp)*1000)
-        Ende = int(round(np.sum(Location['NewPolyp'][0:f + 1]) / np.sum(Location['NewPolyp']) * 1000))
-        # MATLAB: LocationMatrix(Counter:Ende) = f   (1-based f)
-        LocationMatrix[Counter:Ende] = f + 1  # store 1-based location
-        Counter = Ende
+    # LocationMatrix: Use the 2D input matrix (row 0: NewPolyp, row 1: DirectCa)
+    # This preserves the correct distributions for both polyp and direct cancer locations
+    LocationMatrix = LocationMatrix_in
 
     # Cancer progression stage matrix
     StageMatrix = np.zeros(1000)
@@ -888,8 +891,8 @@ def NumberCrunching_100000(p, StageVariables, Location, Cost, CostStage, risc,
                         if pos < 50:  # number polyps limited to 50
                             Polyp_Polyps[z, pos] = 1
                             Polyp_PolypYear[z, pos] = time
-                            # MATLAB: LocationMatrix(1, round(rand*999)+1) -- 1-based
-                            Polyp_PolypLocation[z, pos] = LocationMatrix[_rand_idx_1000()]
+                            # MATLAB: LocationMatrix(1, round(rand*999)+1) -- row 1 in MATLAB = row 0 in Python
+                            Polyp_PolypLocation[z, pos] = LocationMatrix[0, _rand_idx_1000()]
 
                             # we just save the percentile of the risk
                             Polyp_EarlyProgression[z, pos] = int(round(np.random.rand() * 499)) + 1
@@ -909,8 +912,8 @@ def NumberCrunching_100000(p, StageVariables, Location, Cost, CostStage, risc,
                         if l2 < 25:
                             Ca_Cancer[z, l2] = 7
                             Ca_CancerYear[z, l2] = time
-                            # MATLAB: LocationMatrix(2, round(rand*999)+1) -- same 1D array
-                            Ca_CancerLocation[z, l2] = LocationMatrix[_rand_idx_1000()]
+                            # MATLAB: LocationMatrix(2, round(rand*999)+1) -- row 2 in MATLAB = row 1 in Python
+                            Ca_CancerLocation[z, l2] = LocationMatrix[1, _rand_idx_1000()]
                             Ca_DwellTime[z, l2] = 0
 
                             # a random number for stage and sojourn time
@@ -941,6 +944,17 @@ def NumberCrunching_100000(p, StageVariables, Location, Cost, CostStage, risc,
                             DirectCancer2[yi] += 1
                             if Ca_CancerLocation[z, l2] < 4:
                                 DirectCancer2R[yi] += 1
+
+                            if DEBUG_TRACE:
+                                _trace_rows.append({
+                                    'patient': z, 'year': y, 'quarter': q,
+                                    'time': time, 'pathway': 'direct',
+                                    'polyp_stage': 0,
+                                    'polyp_year': 0,
+                                    'dwell_time': 0,
+                                    'location': int(Ca_CancerLocation[z, l2]),
+                                    'gender': int(Gender[z]),
+                                })
 
                     #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                     #      a polyp progresses           %
@@ -993,6 +1007,17 @@ def NumberCrunching_100000(p, StageVariables, Location, Cost, CostStage, risc,
                                 ProgressedCancer[yi] += 1
                                 if Ca_CancerLocation[z, l2] < 4:
                                     ProgressedCancerR[yi] += 1
+
+                                if DEBUG_TRACE:
+                                    _trace_rows.append({
+                                        'patient': z, 'year': y, 'quarter': q,
+                                        'time': time, 'pathway': 'progressed',
+                                        'polyp_stage': polyp_stage,
+                                        'polyp_year': Polyp_PolypYear[z, f],
+                                        'dwell_time': time - Polyp_PolypYear[z, f],
+                                        'location': int(Ca_CancerLocation[z, l2]),
+                                        'gender': int(Gender[z]),
+                                    })
 
                                 # delete the polyp
                                 l_now = _count_nonzero(Polyp_Polyps[z, :])
@@ -1047,6 +1072,17 @@ def NumberCrunching_100000(p, StageVariables, Location, Cost, CostStage, risc,
                             if Ca_CancerLocation[z, l2] < 4:
                                 DirectCancerR[yi] += 1
 
+                            if DEBUG_TRACE:
+                                _trace_rows.append({
+                                    'patient': z, 'year': y, 'quarter': q,
+                                    'time': time, 'pathway': 'fast_cancer',
+                                    'polyp_stage': polyp_stage,
+                                    'polyp_year': Polyp_PolypYear[z, f],
+                                    'dwell_time': time - Polyp_PolypYear[z, f],
+                                    'location': int(Ca_CancerLocation[z, l2]),
+                                    'gender': int(Gender[z]),
+                                })
+
                             # delete the polyp
                             l_now = _count_nonzero(Polyp_Polyps[z, :])
                             _shift_left_polyp(Polyp_Polyps, Polyp_PolypYear,
@@ -1056,17 +1092,23 @@ def NumberCrunching_100000(p, StageVariables, Location, Cost, CostStage, risc,
                     #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                     #   a polyp shrinks or disappears      %
                     #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                    # MATLAB computes l once BEFORE the loop and reuses it for all
+                    # shift operations:  Polyp.Polyps(z, f:l) = Polyp.Polyps(z, f+1:l+1)
+                    # We must do the same — using _count_nonzero AFTER decrementing
+                    # to 0 gives a value that is 1 too small, leaving stranded
+                    # "ghost polyps" with PolypYear=0 and PolypLocation=0.
                     l_poly = _count_nonzero(Polyp_Polyps[z, :])  # recalculate
                     for f in range(l_poly - 1, -1, -1):
                         polyp_stage = int(Polyp_Polyps[z, f])
                         if np.random.rand() < StageVariables['Healing'][polyp_stage - 1]:
                             Polyp_Polyps[z, f] -= 1
                             if Polyp_Polyps[z, f] == 0:
-                                # polyp disappears
-                                l_now = _count_nonzero(Polyp_Polyps[z, :])
+                                # polyp disappears — shift using l_poly (the count
+                                # before any deletions in this loop), matching MATLAB
                                 _shift_left_polyp(Polyp_Polyps, Polyp_PolypYear,
                                                   Polyp_PolypLocation, Polyp_EarlyProgression,
-                                                  Polyp_AdvProgression, z, f, l_now - 1)
+                                                  Polyp_AdvProgression, z, f, l_poly - 1)
+                                l_poly -= 1
 
                     #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                     # symptom development               %
@@ -1731,6 +1773,20 @@ def NumberCrunching_100000(p, StageVariables, Location, Cost, CostStage, risc,
         'Sept9': Number_Sept9,
         'other': Number_other,
     }
+
+    # Write debug trace CSV if enabled
+    if DEBUG_TRACE and _trace_rows:
+        import csv
+        trace_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  'debug_cancer_trace.csv')
+        fieldnames = ['patient', 'year', 'quarter', 'time', 'pathway',
+                       'polyp_stage', 'polyp_year', 'dwell_time',
+                       'location', 'gender']
+        with open(trace_path, 'w', newline='') as csvf:
+            writer = csv.DictWriter(csvf, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(_trace_rows)
+        print(f"DEBUG_TRACE: wrote {len(_trace_rows)} cancer events to {trace_path}")
 
     return (y, Gender, DeathCause, Last, DeathYear, NaturalDeathYear,
             DirectCancer, DirectCancerR, DirectCancer2, DirectCancer2R,

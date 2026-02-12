@@ -127,7 +127,8 @@ def calculate_sub(handles):
     else:
         dwell_speed = 'Fast'
 
-    # Explicit override from original MATLAB code (line 66: DwellSpeed = 'Slow')
+    # MATLAB CalculateSub.m:66 unconditionally overrides DwellSpeed to 'Slow'
+    # (regardless of what the settings file contains).  Match that behaviour.
     dwell_speed = 'Slow'
 
     # --- Location ---
@@ -560,5 +561,8 @@ def calculate_sub(handles):
         print(f"Error in Evaluation: {e}")
         import traceback
         traceback.print_exc()
+
+    # Store data in handles (matching MATLAB behavior: handles.data = data)
+    handles['data'] = data
 
     return handles, bm
