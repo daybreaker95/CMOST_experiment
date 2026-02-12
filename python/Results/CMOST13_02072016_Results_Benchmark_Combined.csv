@@ -1,0 +1,501 @@
+Description,Value
+early polyps year 25,4.52
+early polyps year 35,7.25
+early polyps year 45,9.43
+early polyps year 60,27.05
+early polyps year 70,39.55
+early polyps year 80,42.6
+advanced polyps year 57,4.8
+advanced polyps year 62,5.85
+advanced polyps year 67,6.6
+advanced polyps year 72,7.5
+advanced polyps year 77,8.1
+advanced polyps year 85,8.4
+Cancer incidence year 22,0.9
+Cancer incidence year 27,2.1
+Cancer incidence year 32,4.5
+Cancer incidence year 37,8.4
+Cancer incidence year 42,16.6
+Cancer incidence year 47,29.3
+Cancer incidence year 52,57.2
+Cancer incidence year 57,76.1
+Cancer incidence year 62,107.3
+Cancer incidence year 67,160.9
+Cancer incidence year 72,209.2
+Cancer incidence year 77,262.5
+Cancer incidence year 82,313.4
+Cancer incidence year 87,343.4
+Early polyps male year 25,5.698
+Early polyps male year 35,9.1396
+Early polyps male year 45,11.8877
+Early polyps male year 60,34.1
+Early polyps male year 70,49.8579
+Early polyps male year 80,53.7028
+Early polyps female year 25,3.342
+Early polyps female year 35,5.3604
+Early polyps female year 45,6.9723
+Early polyps female year 60,20.0
+Early polyps female year 70,29.2421
+Early polyps female year 80,31.4972
+Advanced polyps male year 57,6.2
+Advanced polyps male year 62,7.5
+Advanced polyps male year 67,8.4
+Advanced polyps male year 72,9.2
+Advanced polyps male year 77,9.7
+Advanced polyps male year 85,9.5
+Advanced polyps female year 57,3.4
+Advanced polyps female year 62,4.2
+Advanced polyps female year 67,4.8
+Advanced polyps female year 72,5.8
+Advanced polyps female year 77,6.5
+Advanced polyps female year 85,7.3
+Cancer incidence year male 22,0.9
+Cancer incidence year male 27,2.1
+Cancer incidence year male 32,4.5
+Cancer incidence year male 37,8.7
+Cancer incidence year male 42,17.1
+Cancer incidence year male 47,32.2
+Cancer incidence year male 52,64.0
+Cancer incidence year male 57,90.0
+Cancer incidence year male 62,129.5
+Cancer incidence year male 67,194.7
+Cancer incidence year male 72,252.8
+Cancer incidence year male 77,308.3
+Cancer incidence year male 82,362.7
+Cancer incidence year male 87,395.4
+Cancer incidence year female 22,0.9
+Cancer incidence year female 27,2.0
+Cancer incidence year female 32,4.4
+Cancer incidence year female 37,8.2
+Cancer incidence year female 42,16.0
+Cancer incidence year female 47,26.4
+Cancer incidence year female 52,50.6
+Cancer incidence year female 57,63.1
+Cancer incidence year female 62,86.9
+Cancer incidence year female 67,131.3
+Cancer incidence year female 72,173.6
+Cancer incidence year female 77,228.5
+Cancer incidence year female 82,282.2
+Cancer incidence year female 87,319.5
+% of all early polyps P 1,38.470005503577326
+% of all early polyps P 2,29.719317556411667
+% of all early polyps P 3,23.11502476609796
+% of all early polyps P 4,8.695652173913043
+% of all early polyps P 5,79.78142076502732
+% of all early polyps P 6,20.21857923497268
+dwell time diagnosed cancer,0
+middle 1 polyp,36
+middle 2 polyp,16
+middle 3 polyp,5
+middle 4 polyp,4
+middle 5 polyp,3
+old 1 polyp,40
+old 2 polyp,24
+old 3 polyp,10
+old 4 polyp,8
+old 5 polyp,4
+%P1 transforming,0.021381227282446014
+%P2 transforming,0.21381227282446014
+%P3 transforming,0.3420996365191362
+%P4 transforming,1.0690613641223008
+%P5 transforming,12.828736369467608
+%P6 transforming,85.52490912978405
+% stage 1,15.0
+% stage 2,35.6
+% stage 3,27.9
+% stage 4,21.5
+% rectum Ca year 61 to 65,31.200000000000003
+% rectum Ca year 71 to 75,25.8
+% rectum Ca year male 61 to 65,34.1
+% rectum Ca year male 71 to 75,28.6
+% rectum Ca year female 61 to 65,28.3
+% rectum Ca year female 71 to 75,23.0
+Ad 3mm1 relative danger,0.021381227282446014
+Ad 3mm2 relative danger,0.21381227282446014
+Ad 3mm3 relative danger,0.3420996365191362
+Ad 3mm4 relative danger,1.0690613641223008
+Adv P55 relative danger,12.828736369467608
+Adv P66 relative danger,85.52490912978405
+Cancer mortality male year 22,0.1897
+Cancer mortality male year 27,0.5012
+Cancer mortality male year 32,1.0565
+Cancer mortality male year 37,2.2269
+Cancer mortality male year 42,4.3208
+Cancer mortality male year 47,8.6845
+Cancer mortality male year 52,16.1
+Cancer mortality male year 57,27.34
+Cancer mortality male year 62,44.515
+Cancer mortality male year 67,68.54
+Cancer mortality male year 72,97.71
+Cancer mortality male year 77,133.57
+Cancer mortality male year 82,182.49
+Cancer mortality male year 87,266.34
+Cancer mortality female year 22,0.14
+Cancer mortality female year 27,0.425
+Cancer mortality female year 32,0.9203
+Cancer mortality female year 37,1.8546
+Cancer mortality female year 42,3.6327
+Cancer mortality female year 47,6.8927
+Cancer mortality female year 52,11.67
+Cancer mortality female year 57,18.13
+Cancer mortality female year 62,28.085
+Cancer mortality female year 67,42.01
+Cancer mortality female year 72,62.81
+Cancer mortality female year 77,90.097
+Cancer mortality female year 82,129.93
+Cancer mortality female year 87,212.28
+Cancer mortality overall year 22,0.1655
+Cancer mortality overall year 27,0.4638
+Cancer mortality overall year 32,0.9891
+Cancer mortality overall year 37,2.0413
+Cancer mortality overall year 42,3.975
+Cancer mortality overall year 47,7.777
+Cancer mortality overall year 52,13.83
+Cancer mortality overall year 57,22.59
+Cancer mortality overall year 62,35.925
+Cancer mortality overall year 67,54.36
+Cancer mortality overall year 72,78.43
+Cancer mortality overall year 77,108.39
+Cancer mortality overall year 82,150.077
+Cancer mortality overall year 87,228.69
+fraction of all carcinoma without polyp precursor all,0
+fraction of all carcinoma without polyp precursor right,0
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,

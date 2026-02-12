@@ -1,0 +1,66 @@
+Description,Value
+Number Patients,100000
+Average Age,74.72
+Average Age male,73.2
+Average Age female,76.22
+Screening Colonoscopies,0.0
+Symptom Colonoscopies,4917.0
+Follow up Colonoscopies,0.0
+Number Rectosigmo,0.0
+Number FOBT,0.0
+Numer I-FOBT,0.0
+Number Septin9,0.0
+Number other,0.0
+Colon cancer deaths,1855
+Years lost to colon cancer,24674.5
+Patients died of colonoscopy,0
+Years lost due to colonoscopy,0.0
+Total costs,273635873.5
+Dwell time all cancer (median),13.5
+Dwell time all progressed cancer (median),12.75
+Dwell time all fast cancer (median),15.25
+Sojourn time (median),3.25
+screening stage I,0.0
+screening stage II,0.0
+screening stage III,0.0
+screening stage IV,0.0
+symptoms stage I,694.0
+symptoms stage II,1721.0
+symptoms stage III,1321.0
+symptoms stage IV,942.0
+all stage I,14.83539974348012
+all stage II,36.78922616502779
+all stage III,28.23856348867037
+all stage IV,20.13681060282172
+number stage I,694
+number stage II,1721
+number stage III,1321
+Number ALL Ca,4678
+detected screening,0
+detected symptoms,4678
+detected surveillance,0
+detected baseline,0
+fraction direct all,29.9
+fraction direct right,50.5
+dwell time all ca median,13.5
+dwell time all ca mean,16.007726692209452
+dwell time all ca lower quartile,7.75
+dwell time all ca upper quartile,21.75
+dwell time fast ca. median,15.25
+dwell time fast ca. mean,17.633040935672515
+dwell time fast ca. lower quartile,8.75
+dwell time fast ca. upper quartile,24.3125
+progressed ca dwell time time median,12.75
+progressed ca dwell time mean,15.13476639183353
+progressed ca dwell time lower quartile,7.25
+progressed ca dwell time upper quartile,20.5
+sojourn time median,3.25
+sojourn time mean,3.18473143590841
+sojourn time lower quartile,2.5
+sojourn time upper quartile,3.75
+overall time median,16.68473143590841
+overall time mean,19.192458128117867
+overall time lower quartile,10.934731435908411
+overall time upper quartile,24.93473143590841
+comment,no comment please
+settings name,CMOST13_02072016
